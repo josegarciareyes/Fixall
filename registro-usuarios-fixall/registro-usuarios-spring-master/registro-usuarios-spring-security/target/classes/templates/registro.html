@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro de usuarios</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+	
+		<div class="container mt-5">
+			<div class="navbar-header">
+				
+				<a class="navbar-brand" href="#" th:href="@{/}">Registro</a>
+			</div>
+		</div>
+	
+
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+			<!-- Mensaje de éxito -->
+			<div th:if="${exito}" class="alert alert-success">
+                <p th:text="${exito}"></p>
+			</div>
+
+	        <!-- Mensaje de error -->
+			<div th:if="${error}" class="alert alert-danger">
+                <p th:text="${error}"></p>
+			</div>
+
+				<h1>Regístrate</h1>
+				<form th:action="@{/registro}" method="post" th:object="${usuario}">
+					<!-- Campo para el Nombre -->
+					<div class="form-group">
+						<label class="control-label" for="nombre">Nombre Completo : </label> <input
+							id="nombre" type="text" class="form-control" th:field="*{nombre}"
+							required autofocus="autofocus">
+					</div>
+
+					<!-- Campo para el Email -->
+					<div class="form-group">
+						<label class="control-label" for="email">Email : </label> <input
+							id="email" type="email" class="form-control" th:field="*{email}"
+							required autofocus="autofocus">
+					</div>
+
+					<!-- Campo para la Contraseña -->
+					<div class="form-group">
+						<label class="control-label" for="password">Password : </label> <input
+							type="password" id="password" class="form-control" th:field="*{password}"
+							required autofocus="autofocus">
+					</div>
+					<!-- Campo para la Cédula -->
+					<div class="form-group">
+						<label class="control-label" for="cedula">Cédula : </label> <input
+							id="cedula" class="form-control" th:field="*{cedula}"
+							required autofocus="autofocus">
+					</div>
+
+					<!-- Campo para la Dirección -->
+					<div class="form-group">
+						<label class="control-label" for="direccion">Dirección : </label> <input
+							id="direccion" class="form-control" th:field="*{direccion}"
+							required autofocus="autofocus">
+					</div>
+
+					<!-- Campo para el Teléfono -->
+					<div class="form-group">
+						<label class="control-label" for="telefono">Teléfono : </label> <input
+							id="telefono" class="form-control" th:field="*{telefono}"
+							required autofocus="autofocus">
+					</div>
+
+					 <!-- Campo para el Tipo de Usuario -->
+					 <div class="form-group">
+                        <label for="tipoUsuario">Tipo de Usuario</label>
+                        <select class="form-control" id="tipoUsuario" name="tipoUsuario.id" required>
+                            <option value="1">Cliente</option>
+                            <option value="2">Técnico</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo para los Roles -->
+                    <div class="form-group">
+                        <!-- <label for="roles">Roles</label>
+                        <select multiple class="form-control" id="roles" name="roles" required>
+                            <option value="1">Administrador</option>
+                            <option value="2">Usuario</option>
+                        </select>
+                        <small class="text-muted">Presiona CTRL para seleccionar múltiples roles</small> -->
+						<input type="hidden" name="roles" value="2">
+                    </div>
+
+					<!-- Botón de Registro -->
+					<div class="form-group mt-4">
+						<button type="submit" class="btn btn-success">Registrar</button>
+						<span>¿Ya tienes cuenta? <a th:href="@{/login}">inicia sesión aqui</a></span>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
