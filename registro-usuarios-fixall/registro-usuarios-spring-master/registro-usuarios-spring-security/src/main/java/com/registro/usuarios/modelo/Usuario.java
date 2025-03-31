@@ -1,6 +1,7 @@
 package com.registro.usuarios.modelo;
 
 //  https://copilot.microsoft.com/chats/3xizxFyWBfC21MZgKgKPC
+// Aquí estoy probando si se actulizan los cambios que hago
 
 import java.util.List;
 import java.util.Set;
