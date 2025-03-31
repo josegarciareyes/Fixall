@@ -59,10 +59,12 @@ public class SecurityConfiguration{
                     .permitAll() // Permite el acceso a la página de login
                     .and()
                 .logout() // Configuración del logout
+                    .logoutUrl("/logout") // Configura la URL para cerrar sesión
                     .logoutSuccessUrl("/login?logout") 
                     // Redirige a esta URL después de cerrar sesión
-                    .permitAll(); 
-                    // Permite el logout sin autenticación
+                    .permitAll() // Permite el logout sin autenticación
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID");
             return http.build(); // Construye la configuración
         }
 
