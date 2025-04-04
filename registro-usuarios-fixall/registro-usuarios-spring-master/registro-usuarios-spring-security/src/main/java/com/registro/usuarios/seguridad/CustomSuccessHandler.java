@@ -7,43 +7,44 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import com.registro.usuarios.modelo.Usuario;
-import com.registro.usuarios.servicio.UsuarioServicio;
+import com.registro.usuarios.repositorio.UsuarioRepositorio;
+
 
 
 
 @Component
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final UsuarioServicio usuarioServicio; // Inyectamos el servicio para obtener detalles del usuario
+    private final UsuarioRepositorio usuarioRepositorio;
 
-    public CustomSuccessHandler(@Lazy UsuarioServicio usuarioServicio) {
-        this.usuarioServicio = usuarioServicio; // Inicializamos el servicio
+    // Constructor para inyectar el repositorio de usuarios
+    public CustomSuccessHandler(UsuarioRepositorio usuarioRepositorio) {
+        this.usuarioRepositorio = usuarioRepositorio;
     }
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        // Obtén el usuario autenticado desde el contexto de Spring Security
-        User userDetails = (User) authentication.getPrincipal(); // Obtiene los detalles del usuario autenticado
+        // Obtener el email del usuario autenticado
+        String email = authentication.getName();
 
-        // Utiliza el servicio para buscar el usuario en la base de datos
-        Usuario usuario = usuarioServicio.buscarPorEmail(userDetails.getUsername()); // Busca el usuario por email (username)
+        // Buscar al usuario por su email
+        Usuario usuario = usuarioRepositorio.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con email: " + email));
 
-        // Verifica el tipo de usuario y redirige
-        String tipoUsuario = usuario.getTipoUsuario().getNombre(); // Obtiene el tipo de usuario
+        // Obtener el tipo de usuario directamente de Usuario
+        String tipoUsuario = usuario.getTipoUsuario().getNombre();
 
+        // Redirección basada en el tipo de usuario
         if ("Cliente".equalsIgnoreCase(tipoUsuario)) {
-            response.sendRedirect("/cliente/home"); // Redirige a la página del Cliente
+            response.sendRedirect("/cliente/home"); // Página para clientes
         } else if ("Técnico".equalsIgnoreCase(tipoUsuario)) {
-            response.sendRedirect("/tecnico/home"); // Redirige a la página del Técnico
+            response.sendRedirect("/tecnico/home"); // Página para técnicos
         } else {
-            response.sendRedirect("/access-denied"); // Página para casos inesperados
+            response.sendRedirect("/default/home"); // Página por defecto si no se identifica el tipo
         }
     }
 }

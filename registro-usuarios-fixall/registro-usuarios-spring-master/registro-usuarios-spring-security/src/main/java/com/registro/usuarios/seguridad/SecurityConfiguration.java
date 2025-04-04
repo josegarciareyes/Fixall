@@ -28,6 +28,7 @@ public class SecurityConfiguration{
 
 
 	@Autowired
+    @Lazy
 	private UsuarioServicio usuarioServicio;
 	
 	@Bean

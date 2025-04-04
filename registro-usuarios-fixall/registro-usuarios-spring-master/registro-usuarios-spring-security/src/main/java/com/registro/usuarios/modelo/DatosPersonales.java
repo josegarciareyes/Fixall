@@ -17,27 +17,27 @@ public class DatosPersonales {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre",nullable = false)
-    private String nombre;
+    @Column(nullable = false)
+    private String nombre; // Nombre del usuario
 
-    @Column(name = "cedula",nullable = false)
-    private String cedula;
+    @Column(unique = true, nullable = false)
+    private String cedula; // Número de cédula único
 
-    @Column(name = "direccion",nullable = false)
-    private String direccion;
+    @Column(nullable = false)
+    private String direccion; // Dirección
 
-    @Column(name = "telefono",nullable = false)
-    private String telefono;
+    @Column(nullable = false)
+    private String telefono; // Teléfono
 
     @OneToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    private Usuario usuario; // Relación con Usuario
 
-    // Constructor sin argumentos
+    // Constructor vacío (requerido por JPA)
     public DatosPersonales() {
     }
 
-    // Constructor con argumentos
+    // Constructor
     public DatosPersonales(String nombre, String cedula, String direccion, String telefono, Usuario usuario) {
         this.nombre = nombre;
         this.cedula = cedula;
@@ -46,7 +46,7 @@ public class DatosPersonales {
         this.usuario = usuario;
     }
 
-    // Getters y Setters
+    // Getters y setters
     public Long getId() {
         return id;
     }
