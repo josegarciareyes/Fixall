@@ -14,14 +14,14 @@ public class TipoServicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String nombre;  // Por ejemplo, "Reparación", "Instalación"
+    @Column(nullable = false)
+    private String nombre; // Nombre del tipo de servicio, por ejemplo: "Reparación", "Instalación"
 
-    // Constructor sin argumentos
+    // Constructor vacío
     public TipoServicio() {
     }
 
-    // Constructor con argumentos
+    // Constructor con parámetros
     public TipoServicio(String nombre) {
         this.nombre = nombre;
     }
@@ -42,5 +42,4 @@ public class TipoServicio {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 }

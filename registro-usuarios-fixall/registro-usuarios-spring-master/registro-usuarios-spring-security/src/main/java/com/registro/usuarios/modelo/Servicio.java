@@ -2,17 +2,16 @@ package com.registro.usuarios.modelo;
 
 
 
-import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,36 +22,34 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    private Usuario usuario; // Relación con Usuario
 
     @ManyToOne
     @JoinColumn(name = "tipo_servicio_id", nullable = false)
-    private TipoServicio tipoServicio;
+    private TipoServicio tipoServicio; // Relación con TipoServicio
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "detalle_servicio_id", nullable = false)
+    private DetalleServicio detalleServicio; // Relación con DetalleServicio
 
     @ManyToOne
     @JoinColumn(name = "estado_id", nullable = false)
-    private Estado estado;
+    private Estado estado; // Relación con Estado del servicio
 
-    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
-    private List<DetalleServicio> detalleServicios; // Relación con los detalles del servicio
-
-
-    @Column(nullable = false)
-    private String descripcion; // Campo para la descripción del servicio
-
-    // Constructor sin argumentos
+    // Constructor vacío
     public Servicio() {
     }
 
-    // Constructor con argumentos
-    public Servicio(Usuario usuario, TipoServicio tipoServicio, Estado estado, List<DetalleServicio> detalleServicios) {
+    // Constructor completo
+    public Servicio(Usuario usuario, TipoServicio tipoServicio, DetalleServicio detalleServicio, Estado estado) {
         this.usuario = usuario;
         this.tipoServicio = tipoServicio;
+        this.detalleServicio = detalleServicio;
         this.estado = estado;
-        this.detalleServicios = detalleServicios;
     }
+
     // Getters y Setters
     public Long getId() {
         return id;
@@ -78,27 +75,19 @@ public class Servicio {
         this.tipoServicio = tipoServicio;
     }
 
+    public DetalleServicio getDetalleServicio() {
+        return detalleServicio;
+    }
+
+    public void setDetalleServicio(DetalleServicio detalleServicio) {
+        this.detalleServicio = detalleServicio;
+    }
+
     public Estado getEstado() {
         return estado;
     }
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public List<DetalleServicio> getDetalleServicios() {
-        return detalleServicios;
-    }
-
-    public void setDetalleServicios(List<DetalleServicio> detalleServicios) {
-        this.detalleServicios = detalleServicios;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 }

@@ -1,41 +1,41 @@
 package com.registro.usuarios.modelo;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "detalle_servicio")
 public class DetalleServicio {
 
-    @Id
+   @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String descripcion;
-
-    @ManyToOne
-    @JoinColumn(name = "servicio_id", nullable = false)
-    private Servicio servicio;
+    private String descripcion; // Detalles específicos del servicio solicitado
 
     @Column(nullable = false)
-    private Double precio;
+    private LocalDateTime fechaRegistro; // Fecha en que se registró el servicio
 
-    // Constructor sin argumentos
+   @OneToOne(mappedBy = "detalleServicio", cascade = CascadeType.ALL)
+    private Servicio servicio; // Relación con Servicio     
+
+    // Constructor vacío
     public DetalleServicio() {
     }
 
-    // Constructor con argumentos
-    public DetalleServicio(Servicio servicio, String descripcion, Double precio) {
-        this.servicio = servicio;
+    // Constructor con parámetros
+    public DetalleServicio(String descripcion, LocalDateTime fechaRegistro) {
         this.descripcion = descripcion;
-        this.precio = precio;
+        this.fechaRegistro = fechaRegistro;
     }
 
     // Getters y Setters
@@ -55,6 +55,14 @@ public class DetalleServicio {
         this.descripcion = descripcion;
     }
 
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
     public Servicio getServicio() {
         return servicio;
     }
@@ -63,11 +71,5 @@ public class DetalleServicio {
         this.servicio = servicio;
     }
 
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
+    
 }

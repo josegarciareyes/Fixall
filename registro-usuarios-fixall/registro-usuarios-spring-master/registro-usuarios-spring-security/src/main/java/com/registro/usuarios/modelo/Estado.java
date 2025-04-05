@@ -10,18 +10,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "estado")
 public class Estado {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String nombre; // Por ejemplo, "Pendiente", "Completado"
+    @Column(nullable = false)
+    private String nombre; // Estado del servicio
 
-    // Constructor sin argumentos
+    // Constructor vacío
     public Estado() {
     }
 
-    // Constructor con argumentos
+    // Constructor con parámetros
     public Estado(String nombre) {
         this.nombre = nombre;
     }
