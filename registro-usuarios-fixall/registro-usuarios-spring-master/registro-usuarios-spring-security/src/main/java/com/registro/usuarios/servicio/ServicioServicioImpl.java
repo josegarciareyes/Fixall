@@ -2,6 +2,7 @@ package com.registro.usuarios.servicio;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class ServicioServicioImpl {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio; // Necesitamos el usuario para asociarlo al servicio
 
+    /**
+     * Registrar un nuevo servicio por parte de un cliente.
+     */
     public void registrarServicio(String emailUsuario, Long tipoServicioId, String descripcion) {
         // Buscar el usuario por su email
         Usuario usuario = usuarioRepositorio.findByEmail(emailUsuario)
@@ -58,6 +62,9 @@ public class ServicioServicioImpl {
         servicioRepositorio.save(servicio);
     }
 
+    /**
+     * Obtener los servicios registrados por un usuario específico.
+     */
     public List<Servicio> obtenerServiciosPorUsuario(String emailUsuario) {
         // Buscar el usuario por su email
         Usuario usuario = usuarioRepositorio.findByEmail(emailUsuario)
@@ -65,5 +72,38 @@ public class ServicioServicioImpl {
 
         // Buscar servicios relacionados al usuario
         return servicioRepositorio.findByUsuario(usuario);
+    }
+
+    /**
+     * Obtener todos los servicios solicitados.
+     */
+    public List<Servicio> obtenerTodosLosServicios() {
+        // Recuperar todos los servicios solicitados
+        return servicioRepositorio.findAll();
+    }
+
+    /**
+     * Actualizar los estados de los servicios.
+     * @param estados Map que contiene el ID del servicio y el ID del nuevo estado.
+     */
+    public void actualizarEstadosServicios(Map<Long, Long> estados) {
+        estados.forEach((key, value) -> {
+            Long servicioId = key;
+            Long estadoId = value;
+
+            // Buscar el servicio por ID
+            Servicio servicio = servicioRepositorio.findById(servicioId)
+                    .orElseThrow(() -> new RuntimeException("Servicio no encontrado"));
+
+            // Buscar el estado por ID
+            Estado estado = estadoRepositorio.findById(estadoId)
+                    .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+            // Actualizar el estado del servicio
+            servicio.setEstado(estado);
+
+            // Guardar el servicio actualizado
+            servicioRepositorio.save(servicio);
+        });
     }
 }
