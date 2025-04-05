@@ -24,10 +24,17 @@ public class ClienteController {
     private ServicioServicioImpl servicioServicio;
 
     @GetMapping("/home")
-    public String mostrarHomeCliente(Model model) {
-        // Agregar los tipos de servicio al modelo
+    public String mostrarHomeCliente(Model model, Principal principal) {
+        // Obtener email del usuario autenticado
+        String emailUsuario = principal.getName();
+
+        // Pasar los tipos de servicio al modelo
         model.addAttribute("tipoServicios", tipoServicioRepositorio.findAll());
-        return "cliente/home"; // Vista principal del cliente
+
+        // Pasar los servicios registrados por el usuario al modelo
+        model.addAttribute("serviciosRegistrados", servicioServicio.obtenerServiciosPorUsuario(emailUsuario));
+
+        return "cliente/home";
     }
 
     @PostMapping("/registrar-servicio")

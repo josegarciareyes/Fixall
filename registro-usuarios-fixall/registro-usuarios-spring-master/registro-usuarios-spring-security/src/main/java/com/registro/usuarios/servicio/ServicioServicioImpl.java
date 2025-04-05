@@ -1,6 +1,7 @@
 package com.registro.usuarios.servicio;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,14 @@ public class ServicioServicioImpl {
 
         // Guardar el servicio (el detalle también se guarda automáticamente debido a CascadeType.ALL)
         servicioRepositorio.save(servicio);
+    }
+
+    public List<Servicio> obtenerServiciosPorUsuario(String emailUsuario) {
+        // Buscar el usuario por su email
+        Usuario usuario = usuarioRepositorio.findByEmail(emailUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Buscar servicios relacionados al usuario
+        return servicioRepositorio.findByUsuario(usuario);
     }
 }
