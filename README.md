@@ -181,7 +181,7 @@ Adicionalmente se realizó otro repositorio para el frontend que no pudo ser enl
 # 8.  Autores
 
 - **Jose Armando Garcia Reyes - Developer**
-- **Mateo Grisales - Developer**
+- **Mateo Grisales Muñoz - Developer**
 
 
 
