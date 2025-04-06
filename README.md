@@ -76,9 +76,11 @@ Adicionalmente se realizó otro repositorio para el frontend que no pudo ser enl
 - ## Ejecutar el proyecto:
   
   * Instalar dependencias:
+    ```  
      ./mvnw install
   
   * Levantar el servidor:
+    ```
     ./mvnw spring-boot:run
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
