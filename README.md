@@ -67,9 +67,8 @@ Adicionalmente se realizó otro repositorio para el frontend que no pudo ser enl
 # 4. Instalación
 
 - # Clonar el repositorio:
-
-git clone https://github.com/<usuario>/fixall.git
-cd fixall
+  https://github.com/josegarciareyes/Fixall
+  cd fixall
 
 - # Configurar la base de datos:
 
