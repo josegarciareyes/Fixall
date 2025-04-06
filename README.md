@@ -15,7 +15,7 @@ Fixall es un sistema web diseñado para conectar usuarios y técnicos, facilitan
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-1. # Descripción General
+# 1. Descripción General
 
 Fixall permite a los usuarios:
 
@@ -27,7 +27,7 @@ El proyecto fue desarrollado como parte del bootcamp de Talento Tech, nivel Prog
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-2. # Características Principales
+# 2. Características Principales
 
 - Autenticación y autorización de usuarios.
 - Gestión de servicios técnicos dividida por roles (Cliente y Técnico).
@@ -37,7 +37,7 @@ El proyecto fue desarrollado como parte del bootcamp de Talento Tech, nivel Prog
    
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-3. # Tecnologías Utilizadas
+# 3. Tecnologías Utilizadas
    
 # Backend:
 - Java 21
@@ -64,7 +64,7 @@ Adicionalmente se realizó otro repositorio para el frontend que no pudo ser enl
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-4. # Instalación
+# 4. Instalación
 
 - # Clonar el repositorio:
 
@@ -85,7 +85,7 @@ cd fixall
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-5. # Uso
+# 5. Uso
 
 # Cliente:
 
@@ -100,7 +100,7 @@ cd fixall
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-6. # Configuración de la Base de Datos
+# 6. Configuración de la Base de Datos
 
    - # Crea la base de datos:
      CREATE DATABASE registro_prueba_servicio;
@@ -136,7 +136,7 @@ cd fixall
 
   ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-7. # Estructura del Proyecto
+# 7. Estructura del Proyecto
    
    # Controllers :
      Manejan las solicitudes y envían datos al frontend (ClienteController, TecnicoController, etc.).
@@ -158,7 +158,7 @@ cd fixall
 
    ------------------------------------------------------------------------------------------------------------------------------------------------------
      
-9. # Autores
+# 8.  Autores
     - Jose Armando Garcia Reyes - Developer
     - Mateo Grisales - Developer
 
